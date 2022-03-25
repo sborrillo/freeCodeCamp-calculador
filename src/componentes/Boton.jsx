@@ -6,7 +6,7 @@ function Boton(props){
     return isNaN(valor) && (valor != '.') && (valor != '='); /*retorna directamente true si se cumple todo (SIN IF)*/
   };
   return(
-    <div className={`boton-contenedor ${esOperador(props.children) ? 'operador':null}`}>
+    <div className={`boton-contenedor ${esOperador(props.children) ? 'operador':null}`} onClick={() => props.manejarClic(props.children)}>
       {props.children}
     </div>
   );
