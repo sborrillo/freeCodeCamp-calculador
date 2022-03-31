@@ -4,14 +4,23 @@ import Boton from './componentes/Boton.jsx'
 import Pantalla from './componentes/Pantalla.jsx';
 import BotonClear from './componentes/BotonClear.jsx';
 import { useState } from 'react';
+import { evaluate } from 'mathjs';
 
 function App() {
   const [input, setInput] = useState('');
 
   const agregarInput = val => {
-    setInput(input + val)
+    if((input+val).length<21){
+    setInput(input + val)}else{alert('Demasiados dígitos')}
   };
-  
+  const calcularResultado = () => {
+    if(input){
+      setInput(evaluate(input));
+    }else{
+      alert('Ingrese valores para calcular')
+    }
+
+  }
   return (
     <div className="App">
       <div className='freecodecamp-logo-contenedor'>
@@ -39,16 +48,18 @@ function App() {
           <Boton manejarClic={agregarInput}>7</Boton>
           <Boton manejarClic={agregarInput}>8</Boton>
           <Boton manejarClic={agregarInput}>9</Boton>
-          <Boton manejarClic={agregarInput}>x</Boton>
+          <Boton manejarClic={agregarInput}>*</Boton>
         </div>
         <div className='fila'>
-          <Boton manejarClic={agregarInput}>=</Boton>
+          <Boton manejarClic={calcularResultado }>=</Boton>
           <Boton manejarClic={agregarInput}>0</Boton>
           <Boton manejarClic={agregarInput}>.</Boton>
           <Boton manejarClic={agregarInput}>/</Boton>
         </div>
         <div className='fila'>
-          <BotonClear>Clear</BotonClear>
+          <BotonClear manejarClear={() => setInput('')}>
+            Clear
+          </BotonClear>
         </div>
       </div>
     </div>
